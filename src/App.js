@@ -10,20 +10,37 @@ const [ presupuesto, guardarPresupuesto] = useState(0);
 const [ restante, guardarRestante] = useState(0);
 const [ mostrarpregunta, actualizarPregunta ] = useState(true);
 const [ gastos, guardarGastos] = useState([]);
+const [ gasto, guardarGasto ] = useState({});
+const [ crearGasto, guardarCrearGasto ]=useState (false);
 
-//UseEffect 
+
+//UseEffect que actualiza el restante
   useEffect(() => {
+    if (crearGasto) {
 
-  })
+      //Agrega el nuevo presupuesto.
+      guardarGastos([
+        ...gastos,
+        gasto]);
+
+        //Resta del presupuesto actual
+
+        const presupuestoRestante = restante - gasto.cantidad;
+        guardarRestante(presupuestoRestante);
+
+        //Resetear a False
+
+        guardarCrearGasto(false);
+    }
+
+  }, [gasto, crearGasto, gastos, restante]);
 
 //Cuando agreguemos un nuevo gasto
 
-  const agregarNuevoGasto = gasto =>{
-    guardarGastos([
-      ...gastos,
-      gasto
+/*   const agregarNuevoGasto = gasto =>{
+
     ])
-  }
+  } */
 
 
   return (
@@ -42,7 +59,8 @@ const [ gastos, guardarGastos] = useState([]);
           <div className="row">
             <div className="one-half column">
               <Formulario 
-                agregarNuevoGasto={agregarNuevoGasto}
+                guardarGasto={guardarGasto}
+                guardarCrearGasto={guardarCrearGasto}
               />
             </div>
             <div className="one-half column">

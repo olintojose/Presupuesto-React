@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import Error from './error'
+import PropTypes from 'prop-types';
 
 
 const Pregunta = ({ guardarPresupuesto, guardarRestante, actualizarPregunta }) => {
@@ -58,5 +59,10 @@ if (cantidad < 1 || isNaN ( cantidad )){
             )
 }
 
+Pregunta.propTypes = {
+    guardarPresupuesto: PropTypes.func.isRequired,
+    guardarRestante: PropTypes.func.isRequired,
+    actualizarPregunta: PropTypes.func.isRequired
+}
 
 export default Pregunta;
